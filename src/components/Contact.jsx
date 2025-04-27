@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MailIcon, LinkedInIcon, GithubIcon } from './Icons';
 import translations from '../data/translations';
+import emailjs from 'emailjs-com';
 
 const Contact = ({ darkMode, language }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -83,23 +84,27 @@ const Contact = ({ darkMode, language }) => {
     
     if (validateForm()) {
       setIsSubmitting(true);
-      
-      // Simulate form submission
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-        
-        // Reset form after showing success message
-        setTimeout(() => {
-          setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: '',
-          });
-          setSubmitSuccess(false);
-        }, 3000);
-      }, 1500);
+      // إرسال النموذج عبر EmailJS
+      emailjs.sendForm('service_58cy0hc', 'template_rpdywqc', e.target, 'ESmPJyN0l2JTeTPVR')
+        .then((result) => {
+          console.log(result.text);
+          setIsSubmitting(false);
+          setSubmitSuccess(true);
+  
+          // إعادة تعيين النموذج بعد إرسال البريد بنجاح
+          setTimeout(() => {
+            setFormData({
+              name: '',
+              email: '',
+              subject: '',
+              message: '',
+            });
+            setSubmitSuccess(false);
+          }, 3000);
+        }, (error) => {
+          console.log(error.text);
+          setIsSubmitting(false);
+        });
     }
   };
   
