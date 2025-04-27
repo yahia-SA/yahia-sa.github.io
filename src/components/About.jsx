@@ -27,9 +27,9 @@ const About = ({ darkMode, language }) => {
   }, []);
   
   const personalDetails = [
-    { label: t.about.details.age, value: '28' },
-    { label: t.about.details.experience, value: '5+ ' + t.about.details.years },
-    { label: t.about.details.email, value: 'your.email@example.com' },
+    { label: t.about.details.age, value: '25' },
+    { label: t.about.details.experience, value: '1+ ' + t.about.details.years },
+    { label: t.about.details.email, value: 'yahiasamir70@example.com' },
     { label: t.about.details.location, value: t.about.details.locationValue },
     { label: t.about.details.languages, value: t.about.details.languagesValue },
     { label: t.about.details.availability, value: t.about.details.availabilityValue },
@@ -91,7 +91,7 @@ const About = ({ darkMode, language }) => {
               <div className={`w-full h-full absolute -inset-1 ${darkMode ? 'bg-gradient-to-tr from-primary-dark/30 to-secondary-dark/30' : 'bg-gradient-to-tr from-primary-light/20 to-secondary-light/20'} filter blur-xl opacity-70 transform -rotate-6`}></div>
               <div className="relative p-1">
                 <img 
-                  src="https://i.ibb.co/YBYnfsZ/about-image.jpg" 
+                src='https://scontent.fcai19-8.fna.fbcdn.net/v/t39.30808-6/465578983_3201922629950047_2443436061176819499_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGbsRlYR99FVkoRTxLhLUZjNhcc9iCPuC02Fxz2II-4LfHDdxaVX-i15rf0H_AUZTCkt1E8nJ_U69nMZHRBMvtf&_nc_ohc=4kuKOC0IK8kQ7kNvwG5eOu_&_nc_oc=AdkyUuqx9AhQAp7hmOkUgZGfWL4Qj1F8zudYFsm0qKgTSnWoDdSJp2ldx128jHSQTd0&_nc_zt=23&_nc_ht=scontent.fcai19-8.fna&_nc_gid=HUbxBf6eorQPiykfQT_SrQ&oh=00_AfEakPdPlYKmnfim0EMME1aDPXWfE4dS9PpOaNb5u8BKFg&oe=68134FA9'
                   alt="About Me" 
                   className="w-full h-auto rounded-lg"
                 />

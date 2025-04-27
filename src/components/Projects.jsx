@@ -48,6 +48,7 @@ const Projects = ({ darkMode, language }) => {
               key={index}
               title={project.title}
               description={project.description}
+              image={project.image}
               technologies={project.technologies}
               githubUrl={project.githubUrl}
               liveUrl={project.liveUrl}

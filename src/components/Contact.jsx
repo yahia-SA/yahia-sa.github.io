@@ -253,7 +253,7 @@ const Contact = ({ darkMode, language }) => {
               
               <div className="space-y-4">
                 <a 
-                  href="mailto:your.email@example.com" 
+                  href="mailto:yahiasamir70@gmail.com" 
                   className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-300 ${
                     darkMode 
                     ? 'text-gray-300 hover:bg-gray-600' 
@@ -263,11 +263,11 @@ const Contact = ({ darkMode, language }) => {
                   <div className={`p-2 rounded-full ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
                     <MailIcon className="w-6 h-6" />
                   </div>
-                  <span>your.email@example.com</span>
+                  <span>yahiasamir70@gmail.com</span>
                 </a>
                 
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://linkedin.com/in/yahia-sa" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-300 ${
@@ -279,11 +279,11 @@ const Contact = ({ darkMode, language }) => {
                   <div className={`p-2 rounded-full ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
                     <LinkedInIcon className="w-6 h-6" />
                   </div>
-                  <span>linkedin.com/in/yourprofile</span>
+                  <span>linkedin.com/in/yahia-sa</span>
                 </a>
                 
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/yahia-sa" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-300 ${
@@ -295,7 +295,7 @@ const Contact = ({ darkMode, language }) => {
                   <div className={`p-2 rounded-full ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
                     <GithubIcon className="w-6 h-6" />
                   </div>
-                  <span>github.com/yourusername</span>
+                  <span>github.com/yahia-sa</span>
                 </a>
               </div>
             </div>

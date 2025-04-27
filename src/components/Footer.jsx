@@ -49,7 +49,7 @@ const Footer = ({ darkMode, language }) => {
             </a>
             
             <a 
-              href="mailto:your.email@example.com"
+              href="mailto:yahiasamir70@gmail.com"
               className={`p-2 rounded-full transition-colors duration-300 ${
                 darkMode 
                 ? 'bg-gray-800 text-gray-300 hover:text-white' 

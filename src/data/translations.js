@@ -1,3 +1,8 @@
+import bostaimage from '/src/assets/bosta.png'; // Import the image
+import fixiezimage from '/src/assets/Fixiez.svg';
+import movieAppimage from '/src/assets/movie_app.jpg';
+import togetherimage from '/src/assets/together.png';
+
 const translations = {
   en: {
     nav: {
@@ -53,17 +58,17 @@ const translations = {
           company: "Fixiez",
           date: "2025 - Present",
           description: "•	App for residential compounds to request maintenance services and schedule maintenance tasks. Technologies: Flutter, Firebase, REST APIs, Dio, shared_preferences"        },
-        {
+          {
+            position: "Ios Developer",
+            company: "Bosta",
+            date: "2025",
+            description: "Profile & Albums viewer using Moya, RxSwift, and SPM.	Focus on state management and clean code practices."          
+          },
+  {
           position: "Flutter Developer",
           company: "Together",
-          date: "2018",
+          date: "2022",
           description: "	Enables users to share/sell unused items locally. Features Firebase Auth, real-time updates, responsive UI with ScreenUtil.Stack: Flutter, Dio, Firebase"
-        },
-        {
-          position: "Ios Developer",
-          company: "Bosta",
-          date: "2025",
-          description: "Profile & Albums viewer using Moya, RxSwift, and SPM.	Focus on state management and clean code practices."          
         },
         {
           position: "Flutter Developer",
@@ -80,6 +85,7 @@ const translations = {
         {
           title: "Fixiez App",
           description: "A comprehensive App for managing maintenance services and technicians.",
+          image:fixiezimage,
           technologies: ["Flutter", "Rest API", "Shared Preferences", "Dio","Bloc"],
           githubUrl: "https://github.com/yahia-SA/fixiez",
           liveUrl: "https://example.com"
@@ -87,6 +93,7 @@ const translations = {
         {
           title: "Together App",
           description: "A social App connecting people with shared interests and activities.",
+          image:togetherimage,
           technologies: ["Flutter", "Rest API", "Shared Preferences", "Dio", "Bloc"],
           githubUrl: "https://github.com/yahia-SA/together/tree/yahia",
           liveUrl: "https://example.com"
@@ -94,6 +101,7 @@ const translations = {
         {
           title: "Bosta Task",
           description: "A shipment tracking and management system with real-time updates.",
+          image:bostaimage,
           technologies: ["Ios", "RxSwift", "Moya"],
           githubUrl: "https://github.com/yahia-SA/BostaTask",
           liveUrl: "https://example.com"
@@ -101,6 +109,7 @@ const translations = {
         {
           title: "Movie App",
           description: "A modern movie browsing application with advanced search features.",
+          image:movieAppimage,
           technologies: ["Flutter", "API Integration", "Responsive Design"],
           githubUrl: "https://github.com/yahia-SA/api-MovieApp-",
           liveUrl: "https://example.com"
@@ -220,16 +229,17 @@ const translations = {
           description: "• تطبيق للمجمعات السكنية لطلب خدمات الصيانة وجدولة مهام الصيانة. التقنيات: فلاتر، فايربيس، APIs، Dio، Shared Preferences"
         },
         {
-          position: "مطور فلاتر",
-          company: "Together",
-          date: "2018",
-          description: "تمكن المستخدمين من مشاركة/بيع الأشياء غير المستخدمة محليًا. الخصائص: Firebase Auth، التحديثات الفورية، واجهة مستخدم مرنة باستخدام ScreenUtil. Stack: فلاتر، Dio، Firebase"
-        },
-        {
           position: "مطور آيفون",
           company: "Bosta",
           date: "2025",
           description: "عارض للملف الشخصي والألبومات باستخدام Moya، RxSwift، و SPM. تركيز على إدارة الحالة والممارسات النظيفة."
+        },
+
+        {
+          position: "مطور فلاتر",
+          company: "Together",
+          date: "2022",
+          description: "تمكن المستخدمين من مشاركة/بيع الأشياء غير المستخدمة محليًا. الخصائص: Firebase Auth، التحديثات الفورية، واجهة مستخدم مرنة باستخدام ScreenUtil. Stack: فلاتر، Dio، Firebase"
         },
         {
           position: "مطور فلاتر",
@@ -246,6 +256,7 @@ const translations = {
         {
           title: "تطبيق Fixiez",
           description: "تطبيق شاملة لإدارة خدمات الصيانة والفنيين.",
+          image:fixiezimage,
           technologies: ["فلاتر", "REST API", "Shared Preferences", "Dio", "Bloc"],
           githubUrl: "https://github.com/yahia-SA/fixiez",
           liveUrl: "https://example.com"
@@ -253,6 +264,7 @@ const translations = {
         {
           title: "تطبيق Together",
           description: "تطبيق اجتماعية تربط الأشخاص ذوي الاهتمامات والأنشطة المشتركة.",
+          image:togetherimage,
           technologies: ["فلاتر", "REST API", "Shared Preferences", "Dio", "Bloc"],
           githubUrl: "https://github.com/yahia-SA/together/tree/yahia",
           liveUrl: "https://example.com"
@@ -260,6 +272,7 @@ const translations = {
         {
           title: "Bosta Task",
           description: "نظام تتبع وإدارة الشحنات مع تحديثات فورية.",
+          image:bostaimage,
           technologies: ["آيفون", "RxSwift", "Moya"],
           githubUrl: "https://github.com/yahia-SA/BostaTask",
           liveUrl: "https://example.com"
@@ -267,6 +280,7 @@ const translations = {
         {
           title: "تطبيق الأفلام",
           description: "تطبيق حديث لاستعراض الأفلام مع ميزات بحث متقدمة.",
+          image:movieAppimage,
           technologies: ["فلاتر", "API Integration", "تصميم مرن"],
           githubUrl: "https://github.com/yahia-SA/api-MovieApp-",
           liveUrl: "https://example.com"
