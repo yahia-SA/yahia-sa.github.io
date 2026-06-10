@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { scrollToSection } from '../utils/scrollToSection';
 import { MailIcon, LinkedInIcon, GithubIcon } from './Icons';
 import translations from '../data/translations';
 import emailjs from 'emailjs-com';
@@ -87,9 +88,7 @@ const Contact = ({ darkMode, language }) => {
       // إرسال النموذج عبر EmailJS
       emailjs.sendForm('service_58cy0hc', 'template_rpdywqc', e.target, 'ESmPJyN0l2JTeTPVR')
         .then((result) => {
-          console.log(result.text);
-          setIsSubmitting(false);
-          setSubmitSuccess(true);
+          setSubmitSuccess(true);KW
   
           // إعادة تعيين النموذج بعد إرسال البريد بنجاح
           setTimeout(() => {
@@ -315,6 +314,7 @@ const Contact = ({ darkMode, language }) => {
               <div className="mt-4">
                 <a 
                   href="#projects" 
+                  onClick={(e) => { e.preventDefault(); scrollToSection('projects'); }}
                   className={`inline-block px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
                     darkMode 
                     ? 'bg-transparent border border-primary-dark text-primary-dark hover:bg-primary-dark hover:text-white' 

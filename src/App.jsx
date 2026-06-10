@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SunIcon, MoonIcon, GlobeIcon } from './components/Icons';
+import { scrollToSection } from './utils/scrollToSection';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -33,16 +33,19 @@ function App() {
     document.body.className = savedLanguage === 'ar' ? 'rtl' : 'ltr';
   }, []);
 
+  // After deploy: hash URL scrolls once layout/fonts are ready
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, '');
+    if (!hash) return;
+    const id = window.setTimeout(() => scrollToSection(hash), 280);
+    return () => clearTimeout(id);
+  }, []);
+
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
     localStorage.setItem('darkMode', newDarkMode.toString());
-    
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', newDarkMode);
   };
 
   const toggleLanguage = () => {
@@ -58,32 +61,16 @@ function App() {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-      <div className="fixed top-4 right-4 z-50 flex items-center space-x-4">
-        <button
-          onClick={toggleDarkMode}
-          className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'} transition-all duration-300`}
-          aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {darkMode ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
-        </button>
-        
-        <button
-          onClick={toggleLanguage}
-          className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 text-blue-300' : 'bg-gray-200 text-blue-700'} transition-all duration-300`}
-          aria-label={language === 'en' ? 'Switch to Arabic' : 'Switch to English'}
-        >
-          <GlobeIcon className="w-6 h-6" />
-        </button>
-      </div>
-      
       <Navbar 
         darkMode={darkMode} 
         language={language} 
         menuOpen={menuOpen} 
         toggleMenu={toggleMenu} 
+        toggleDarkMode={toggleDarkMode}
+        toggleLanguage={toggleLanguage}
       />
       
-      <main>
+      <main className="pt-[calc(5rem+env(safe-area-inset-top,0px))]">
         <Hero darkMode={darkMode} language={language} />
         <About darkMode={darkMode} language={language} />
         <Experience darkMode={darkMode} language={language} />

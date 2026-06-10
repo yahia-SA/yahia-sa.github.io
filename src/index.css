@@ -14,7 +14,19 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scrollToSection() handles offset via measured header; keep padding 0 to avoid double offset */
+  scroll-padding-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* No scroll-margin here — alignment is done in scrollToSection() for 100% accuracy */
+section[id] {
+  scroll-margin-top: 0;
 }
 
 body {

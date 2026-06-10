@@ -106,6 +106,16 @@ const Experience = ({ darkMode, language }) => {
 };
 
 const ExperienceItem = ({ title, organization, date, description, darkMode, isLast }) => {
+  const bulletLines =
+    typeof description === 'string' && description.includes('•')
+      ? description
+          .split(/•/)
+          .map((s) => s.trim())
+          .filter(Boolean)
+      : null;
+
+  const textClass = darkMode ? 'text-gray-300' : 'text-gray-700';
+
   return (
     <div className="relative pl-8">
       {!isLast && (
@@ -124,9 +134,19 @@ const ExperienceItem = ({ title, organization, date, description, darkMode, isLa
             {date}
           </span>
         </div>
-        <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-          {description}
-        </p>
+        {bulletLines ? (
+          <ul
+            className={`list-disc list-outside space-y-1.5 ps-5 marker:text-current ${textClass}`}
+          >
+            {bulletLines.map((line, i) => (
+              <li key={i} className="leading-relaxed ps-0.5">
+                {line}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={textClass}>{description}</p>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { GithubIcon, ExternalLinkIcon } from './Icons';
+import { GithubIcon, ExternalLinkIcon, GooglePlayIcon, AppStoreIcon } from './Icons';
 import translations from '../data/translations';
+
+function resolveProjectLinks(project) {
+  const { googlePlayUrl, appStoreUrl, liveUrl, githubUrl } = project;
+
+  const googlePlay =
+    googlePlayUrl ||
+    (liveUrl?.includes('play.google.com') ? liveUrl : null);
+
+  const appStore =
+    appStoreUrl ||
+    (liveUrl?.includes('apps.apple.com') || liveUrl?.includes('itunes.apple.com')
+      ? liveUrl
+      : null);
+
+  const githubLink = githubUrl?.includes('github.com') ? githubUrl : null;
+
+  const isStore = (u) =>
+    u &&
+    (u.includes('play.google.com') ||
+      u.includes('apps.apple.com') ||
+      u.includes('itunes.apple.com'));
+
+  let webLink = null;
+  if (githubUrl && !githubUrl.includes('github.com')) webLink = githubUrl;
+  else if (liveUrl && !isStore(liveUrl) && !liveUrl.includes('github.com'))
+    webLink = liveUrl;
+
+  return { googlePlay, appStore, githubLink, webLink };
+}
 
 const Projects = ({ darkMode, language }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -44,14 +73,9 @@ const Projects = ({ darkMode, language }) => {
         
         <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 section-transition ${isVisible ? 'visible' : 'hidden'}`}>
           {t.projects.items.map((project, index) => (
-            <ProjectCard 
+            <ProjectCard
               key={index}
-              title={project.title}
-              description={project.description}
-              image={project.image}
-              technologies={project.technologies}
-              githubUrl={project.githubUrl}
-              liveUrl={project.liveUrl}
+              project={project}
               darkMode={darkMode}
               delay={index * 0.1}
             />
@@ -62,7 +86,25 @@ const Projects = ({ darkMode, language }) => {
   );
 };
 
-const ProjectCard = ({ title, description, image, technologies, githubUrl, liveUrl, darkMode, delay }) => {
+const ProjectCard = ({ project, darkMode, delay }) => {
+  const { title, description, image, technologies } = project;
+  const { googlePlay, appStore, githubLink, webLink } = resolveProjectLinks(project);
+
+  const storeBtnClass = `inline-flex items-center justify-center rounded-lg border-2 transition-colors duration-300 ${
+    darkMode
+      ? 'border-gray-500 text-gray-200 hover:bg-gray-600 hover:border-gray-400'
+      : 'border-gray-300 text-gray-800 hover:bg-gray-200 hover:border-gray-400'
+  }`;
+
+  const primaryBtnClass = `inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors duration-300 ${
+    darkMode
+      ? 'bg-primary-dark text-white hover:bg-primary-dark/80'
+      : 'bg-primary-light text-white hover:bg-primary-light/90'
+  }`;
+
+  const showGithub = Boolean(githubLink);
+  const showWeb = Boolean(webLink);
+
   return (
     <div 
       className={`rounded-xl overflow-hidden hover-scale ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} fade-in`}
@@ -100,35 +142,50 @@ const ProjectCard = ({ title, description, image, technologies, githubUrl, liveU
           ))}
         </div>
         
-        <div className="flex justify-between items-center">
-          {githubUrl && (
-            <a 
-              href={githubUrl} 
-              target="_blank" 
+        <div className="flex flex-wrap gap-3 items-center">
+          {googlePlay && (
+            <a
+              href={googlePlay}
+              target="_blank"
               rel="noopener noreferrer"
-              className={`p-2 rounded-full transition-colors duration-300 ${
-                darkMode 
-                ? 'text-gray-300 hover:text-white hover:bg-gray-600' 
-                : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200'
-              }`}
-              aria-label="View source on GitHub"
+              className={`${storeBtnClass} p-2.5`}
+              aria-label="Get it on Google Play"
+              title="Google Play"
             >
-              <GithubIcon className="w-5 h-5" />
+              <GooglePlayIcon className="h-8 w-8 text-[#00A173]" />
             </a>
           )}
-          
-          {liveUrl && (
-            <a 
-              href={liveUrl} 
-              target="_blank" 
+          {appStore && (
+            <a
+              href={appStore}
+              target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors duration-300 ${
-                darkMode 
-                ? 'bg-primary-dark text-white hover:bg-primary-dark/80' 
-                : 'bg-primary-light text-white hover:bg-primary-light/90'
-              }`}
+              className={`${storeBtnClass} p-2.5`}
+              aria-label="Download on the App Store"
+              title="App Store"
             >
-              <span>View Live</span>
+              <AppStoreIcon className="h-8 w-8" />
+            </a>
+          )}
+          {showGithub && (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={primaryBtnClass}
+            >
+              <span>View source</span>
+              <GithubIcon className="w-4 h-4" />
+            </a>
+          )}
+          {showWeb && (
+            <a
+              href={webLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={primaryBtnClass}
+            >
+              <span>Visit site</span>
               <ExternalLinkIcon className="w-4 h-4" />
             </a>
           )}

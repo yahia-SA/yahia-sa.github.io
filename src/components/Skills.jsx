@@ -1,46 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import translations from '../data/translations';
 
 const Skills = ({ darkMode, language }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [animatedSkills, setAnimatedSkills] = useState([]);
+  const animationStartedRef = useRef(false);
+  const staggerTimeoutsRef = useRef([]);
   const t = translations[language];
-  
+
   useEffect(() => {
+    animationStartedRef.current = false;
+    setAnimatedSkills([]);
+  }, [language]);
+
+  useEffect(() => {
+    let mainTimeoutId;
+
     const handleScroll = () => {
       const section = document.getElementById('skills');
-      if (section) {
-        const sectionTop = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (sectionTop < windowHeight * 0.75) {
-          setIsVisible(true);
-          
-          // Animate skills one by one
-          const timeout = setTimeout(() => {
-            const allSkills = [
-              ...t.skills.technical,
-              ...t.skills.professional,
-              ...t.skills.languages
-            ];
-            
-            allSkills.forEach((skill, index) => {
-              setTimeout(() => {
-                setAnimatedSkills(prev => [...prev, skill.name]);
-              }, index * 100);
-            });
-          }, 500);
-          
-          return () => clearTimeout(timeout);
-        }
+      if (!section) return;
+      const sectionTop = section.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (sectionTop < windowHeight * 0.75) {
+        setIsVisible(true);
+
+        if (animationStartedRef.current) return;
+        animationStartedRef.current = true;
+
+        mainTimeoutId = window.setTimeout(() => {
+          const allSkills = [
+            ...t.skills.technical,
+            ...t.skills.professional,
+            ...t.skills.languages,
+          ];
+
+          staggerTimeoutsRef.current = allSkills.map((skill, index) =>
+            window.setTimeout(() => {
+              setAnimatedSkills((prev) => [...prev, skill.name]);
+            }, index * 100)
+          );
+        }, 500);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on mount
-    
+    handleScroll();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (mainTimeoutId) clearTimeout(mainTimeoutId);
+      staggerTimeoutsRef.current.forEach(clearTimeout);
+      staggerTimeoutsRef.current = [];
     };
   }, [t.skills.technical, t.skills.professional, t.skills.languages]);
   
